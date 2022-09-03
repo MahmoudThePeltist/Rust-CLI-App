@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 /*
 @MOUD
 Hey, this is just a basic Rust file where I'm testing out some concepts in one place
@@ -6,79 +8,87 @@ Hey, this is just a basic Rust file where I'm testing out some concepts in one p
 // Defining constants, using &str instead of String for some reason
 const DEV_NAME: &str = "Mahmoud Aburas";
 const APP_VERSION: &str = "1.13.0";
-const APP_VERSION_INT: u32 = 11300;
 
-struct Person {
-    name: String,
-    gender: char
+pub trait LogStuff {
+    fn log_stuff(&self) -> () {
+        println!("Log stuff! (this trait doesn't have a custom implementation.)");
+    }
 }
 
+// Creating a struct to contain the date of birth attributes
 struct DateOfBirth {
     day: u8,
     month: u8,
     year: u16
 }
 
+// adding methods to our struct
 impl DateOfBirth {
-    fn print_date(&self) {
-        println!("{}/{}/{}",self.day,self.month,self.year);
-    }
-
     fn get_season(&self) -> String {
         if self.month >= 3 && self.month < 6 {
-            return ("Spring").to_string();
+            return String::from("Spring");
         } else if self.month >= 6 && self.month < 9 {
-            return ("Summer").to_string();
+            return String::from("Summer");
         } else if self.month >= 9 && self.month < 12 {
-            return ("Autumn").to_string();
+            return String::from("Autumn");
         } else {
-            return ("Winter").to_string();
+            return String::from("Winter");
         }
+    }
+}
+// implementing the ToString trait on our method
+impl ToString for DateOfBirth {
+    fn to_string(&self) -> String {
+        return format!("{}/{}/{}",self.day,self.month,self.year);
+    }
+}
+// Implementing my custom trait in DateOfBirth with it's default implementation
+impl LogStuff for DateOfBirth {}
+// Using one struct in the other
+struct Person {
+    name: String,
+    gender: char,
+    dob: DateOfBirth
+}
+impl LogStuff for Person {
+    fn log_stuff(&self) {
+        println!("Logging:\nname: {}\ngender: {}\ndob: {}\n",self.name,self.gender,self.dob.to_string());
+    }
+}
+
+// Defining a struct that uses generic types
+struct Coordinates<T, U> {
+    longitude: T,
+    latitude: U
+}
+// implementing LogStuff for coordinates
+impl<T: Display, U: Display> LogStuff for Coordinates<T, U> {
+    fn log_stuff(&self) {
+        println!("Coordinates:\nLongitude: {}\nLatitude: {}\n",self.longitude,self.latitude);
     }
 }
 
 // Creating the main function
 fn main() {
+    println!("\nApp by {}\nVersion {}\n~-----------------------------~\n",DEV_NAME,APP_VERSION);
+    
     // Defining an immutable struct, the whole &str ~ String thing is so confusing
     let moud = Person {
-        name: ("Mahmoud").to_string(),
-        gender: 'M'
+        name: String::from("Mahmoud"),
+        gender: 'M',
+        dob: DateOfBirth { day: 23, month: 11, year: 1996 }
     };
-
     // Defining an immutable variable
     let emotional_state = "Happy"; // String or &str
-
     // Some assetions
     assert_eq!(moud.name, "Mahmoud");
-
     // Testing out logging strings and variables
-    println!("~ ----------------------------- ~ {} {}",DEV_NAME,APP_VERSION);
     println!("Hello, My name is {} and I'm {}!", moud.name, emotional_state);
+    println!("I was born in {}!", moud.dob.year);
+    // trying to use my custom trait in my struct
+    moud.log_stuff();
     
-    // This is a code block, it accesses the outer scope but it's variables are limited to it's own scope
-    {
-        let dob = DateOfBirth {
-            day: 23,
-            month: 11,
-            year: 1996
-        };
-
-        // Using shadowing to reassign a variable but only _inside_ the codeblock
-        let emotional_state = "Confused";
-    
-        assert_eq!(dob.day, (10+13));
-        // Using struct methods defined using the impl keyword
-        dob.print_date();
-        println!("I was born in the season of {} and I am {}", dob.get_season(), emotional_state);
-    }
-    // Testing out mutable structs
-    let mut friend = Person {
-        name: ("John").to_string(),
-        gender: 'M'
-    };
-
-    friend.name = ("Garbanzo").to_string();
-    friend.gender = 'I';
+    experiment_structy();
 
     experiment_conditionals(&moud, true);
 
@@ -92,6 +102,47 @@ fn main() {
 
     experiment_references();
 
+    experiment_strings();
+
+}
+
+
+/**
+ * Messing around with generic types in structs
+ */
+fn experiment_structy() {
+    // creating a new struct of type DateOfBirth to test out the code block 
+    let friends_dob = DateOfBirth {
+        day: 13,
+        month: 9,
+        year: 1998
+    };
+    // trying to use the custom trait again
+    friends_dob.log_stuff();
+    // This is a code block, it accesses the outer scope but it's variables are limited to it's own scope
+    {
+        // Using shadowing to reassign a variable but only _inside_ the codeblock
+        let emotional_state = "Confused";
+        // Assertion can fail with 'assertion failed: `(left == right)`
+        assert_eq!(friends_dob.day, 13);
+        // Using struct methods defined using the impl keyword
+        println!("My friend was born in {} the season of {} and I am {}", friends_dob.to_string(), friends_dob.get_season(), emotional_state);
+    }
+    // Testing out mutable structs
+    let mut friend = Person {
+        name: ("John").to_string(),
+        gender: 'M',
+        dob: friends_dob 
+    };
+    // reassigning attrbutes of mutable struct
+    friend.name = ("Garbanzo").to_string();
+    friend.gender = 'I';
+    // creating a struct with predefined types
+    let my_location: Coordinates<f32, f32> = Coordinates {
+        longitude: 32.1213,
+        latitude: 21.1123
+    };
+    my_location.log_stuff();
 }
 
 /**
@@ -154,9 +205,10 @@ fn experiment_iteratables(logging: bool) {
     let age_range = 0..5;
     // defining an array of integers and an array of strings
     let age_array: [u16; 5] = [5, 23, 12, 34, 26];
-    let age_array_s: [&str; 5] = ["zero", "23", "two", "three", "17"];
+    let _age_array_s: [&str; 5] = ["zero", "23", "two", "three", "17"];
     // Automatically defining the values of the array items on creation
     let mut defaults_array: [i8; 10] = [18; 10];
+    defaults_array[1] = 12;
     assert_eq!(defaults_array[9], 18); 
 
     // Loop over a range (range doesn't have an iter method)
@@ -191,6 +243,7 @@ fn experiment_tuples(logging: bool) {
 
     // Destructure the tuple into new variables
     let (zero, one, two, three, four) = age_tuple;
+    println!("{}, {}, {}, {}, {} ", zero, one, two, three.0, four);
 
     // Defining an immutable tuple struct of struct Color
     let color = Color(254,254,100);
@@ -208,17 +261,9 @@ fn experiment_tuples(logging: bool) {
  * Enums
  */
 fn experiment_enums() -> bool {
-    enum Colors {
-        Red,
-        Blue,
-        Green,
-        White,
-        Orange,
-        Yellow,
-        Purple
-    }
+    enum Colors {Red, Blue, Green, White, Orange, Yellow, Purple}
 
-    let mut favorite_color: Colors = Colors::Red;
+    let mut _favorite_color: Colors = Colors::Red;
 
     return true;
     
@@ -254,4 +299,25 @@ fn experiment_references() {
     
     println!("My haters {} ", haters);
 
+}
+
+/**
+ * Fucking around with strings, a struct version of the &str primitive that expand functionality
+ */
+fn experiment_strings() {
+    //Defining a primitive string
+    let nation_of_origin_str: &str = "Hungary";
+    // converting it into a String struct:
+    let nation_of_origin: String = nation_of_origin_str.to_string();
+    // defining a String from the start:
+    let current_location: String = String::from("Libya"); 
+
+    let mut alert_text: String = String::from("Welcome to ");
+    alert_text.push_str(current_location.as_str());
+    alert_text.push('!');
+    let alert_length = alert_text.len();
+    println!("({}) You are from {}, {}", alert_length, nation_of_origin, alert_text);
+
+    // Other useful methods:
+    // https://doc.rust-lang.org/std/string/struct.String.html
 }

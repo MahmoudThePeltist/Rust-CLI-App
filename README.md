@@ -11,8 +11,8 @@
     * passing variables by reference ⚠
 * Variables
     * definition (let, int, char, string)
-    * Variable mutability vs immutability
-* Asserting equality
+    * Variable mutability vs immutability 
+* Asserting equality using the `assert_eq!()` marcro
 * logging and passing variables into logs using the `println!()` macro
 * conditional statements (if / else)
 * looping
@@ -24,7 +24,7 @@
     * iterating over them using `for in`
     * array methods such as `iter()` and `len()`
     * looping by index with range and array length
-* constants, and the difference between a `String` and an `str` (&str)
+* constants
 * tuples and tuple deconstruction
 * codeblocks concept
 * shadowing concept and simple implementation
@@ -33,3 +33,10 @@
     * defining tuple structs and their usage
     * using the `impl` keyword to add methods to a struct
 * always pass values by reference or you will lose them to the new scope
+* Strings
+    * the difference between a `String` and a slice `str` (&str)
+    * Strings as a struct and defining them using a slice 
+    * Common string methods
+* Chapter 10 of The Book
+    * Generic Data Types
+    * Traits and defining shared behvior
