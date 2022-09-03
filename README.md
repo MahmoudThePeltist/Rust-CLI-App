@@ -24,6 +24,10 @@
     * iterating over them using `for in`
     * array methods such as `iter()` and `len()`
     * looping by index with range and array length
+* Vectors
+    * Vector definition (both options)
+    * Vector mutation functions
+    * Vector iteration
 * constants
 * tuples and tuple deconstruction
 * codeblocks concept
