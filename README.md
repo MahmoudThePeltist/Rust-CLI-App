@@ -44,3 +44,6 @@
 * Chapter 10 of The Book
     * Generic Data Types
     * Traits and defining shared behvior
+* Files
+    * Importing file related struct and library
+    * Reading from a file

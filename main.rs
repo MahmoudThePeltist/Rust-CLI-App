@@ -1,4 +1,10 @@
+// importing this to use it as a type
 use std::fmt::Display;
+
+// File struct
+use std::fs::File;
+// Helps perform read and write operations to file
+use std::io::prelude::*;
 
 /*
 @MOUD
@@ -8,20 +14,18 @@ Hey, this is just a basic Rust file where I'm testing out some concepts in one p
 // Defining constants, using &str instead of String for some reason
 const DEV_NAME: &str = "Mahmoud Aburas";
 const APP_VERSION: &str = "1.13.0";
-
+// Defining my own trait, which describes a method that logs data
 pub trait LogStuff {
     fn log_stuff(&self) -> () {
         println!("Log stuff! (this trait doesn't have a custom implementation.)");
     }
 }
-
 // Creating a struct to contain the date of birth attributes
 struct DateOfBirth {
     day: u8,
     month: u8,
     year: u16
 }
-
 // adding methods to our struct
 impl DateOfBirth {
     fn get_season(&self) -> String {
@@ -55,7 +59,6 @@ impl LogStuff for Person {
         println!("Logging:\nname: {}\ngender: {}\ndob: {}\n",self.name,self.gender,self.dob.to_string());
     }
 }
-
 // Defining a struct that uses generic types
 struct Coordinates<T, U> {
     longitude: T,
@@ -105,6 +108,8 @@ fn main() {
     experiment_references();
 
     experiment_strings();
+
+    experiment_files();
 
 }
 
@@ -332,4 +337,20 @@ fn experiment_strings() {
 
     // Other useful methods:
     // https://doc.rust-lang.org/std/string/struct.String.html
+}
+
+/**
+ * Testing out file import
+ */
+fn experiment_files() {
+    // Open a specific file
+    let mut file = File::open("./files/test_string.txt")
+        .expect("Error occured when opening the file!");
+    // Creating new string to hold contents of file
+    let mut contents = String::new();
+    // reading file contents and storing them in a string, expect is used to handle errors
+    file.read_to_string(&mut contents)
+        .expect("Error occured when converting file to string");
+
+    println!("Contents:\n\n{}", contents);
 }
