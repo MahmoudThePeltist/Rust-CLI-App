@@ -1,8 +1,12 @@
 # RUST experiment 1
 
 ## CLI commands
+### When not using cargo
 * Build `rustc main.rs`
 * Run `./main.exe`
+
+### When using cargo
+* Run `cargo run`
 
 ## Concepts covered:
 * Function declaration
