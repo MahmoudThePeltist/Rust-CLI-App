@@ -1,10 +1,12 @@
 // importing this to use it as a type
 use std::fmt::Display;
-
 // File struct
 use std::fs::File;
+// Used for reading user input
+use std::io;
 // Helps perform read and write operations to file
 use std::io::prelude::*;
+use std::env;
 
 /*
 @MOUD
@@ -75,6 +77,77 @@ impl<T: Display, U: Display> LogStuff for Coordinates<T, U> {
 fn main() {
     println!("\nApp by {}\nVersion {}\n~-----------------------------~\n",DEV_NAME,APP_VERSION);
     
+    // Check for arguments
+    let args: Vec<String> = env::args().collect();
+    
+    // Loop over the arguments and run the experiments selected
+    for index in 0..args.len() {
+        println!("Arg {} is {} ", index+1, args[index]);
+        let matchable: &str = &args[index];
+        the_scientist(matchable);
+    }
+}
+
+/**
+ * The scientist is a method responsible for running the experiments
+ */
+fn the_scientist(matchable: &str) {
+    match matchable {
+        "e0" => experiment_structy(),
+        "e1" => {
+            let moud = experiment_variables();
+            experiment_conditionals(&moud, true);
+        },
+        "e2" => experiment_loops(0, 10),
+        "e3" => experiment_vectors(true),
+        "e4" => experiment_iteratables(true),
+        "e5" => experiment_tuples(true),    
+        "e6" => { experiment_enums(); }, // needed brackets because method has return
+        "e7" => experiment_references(),
+        "e8" => experiment_strings(),
+        "e9" => experiment_files(),
+        // Go to user input based picker or quit
+        "home" => experiment_user_input(),
+        "exit" => return,
+        // Handler for 'non-exhaustive patterns'
+        _ => {}
+    }
+}
+
+/**
+ * Taking input from a user, the way it was meant to be played
+ */
+fn experiment_user_input() {
+    let mut input = String::new();
+    
+    println!("Please Select an experiment 👨‍🔬:
+    \ne0 => experiment_structy
+    \ne1 => experiment_variables & experiment_conditionals
+    \ne2 => experiment_loops
+    \ne3 => experiment_vectors
+    \ne4 => experiment_iteratables
+    \ne5 => experiment_tuples
+    \ne6 => experiment_enums
+    \ne7 => experiment_references
+    \ne8 => experiment_strings
+    \ne9 => experiment_files
+    \nhome => 🏠 come back to selector
+    \nexit => 🏃‍♂️ skips testing and exits
+    ");
+    
+    match io::stdin().read_line(&mut input) {
+        Ok(_d) => {
+            println!("You entered: {}", input);
+            for word in input.split_whitespace() {
+                println!("\n~ ----- ~\nChecking: {}", word);
+                the_scientist(word);
+            }
+        }
+        Err(e) => println!("Error occured on read: {}", e)
+    }
+}
+
+fn experiment_variables() -> Person {
     // Defining an immutable struct, the whole &str ~ String thing is so confusing
     let moud = Person {
         name: String::from("Mahmoud"),
@@ -90,29 +163,8 @@ fn main() {
     println!("I was born in {}!", moud.dob.year);
     // trying to use my custom trait in my struct
     moud.log_stuff();
-    
-    experiment_structy();
-
-    experiment_conditionals(&moud, true);
-
-    experiment_loops(0, 10);
-
-    experimental_vectors(true);
-
-    experiment_iteratables(true);
-
-    experiment_tuples(true);
-
-    experiment_enums();
-
-    experiment_references();
-
-    experiment_strings();
-
-    experiment_files();
-
+    return moud;
 }
-
 
 /**
  * Messing around with generic types in structs
@@ -233,7 +285,7 @@ fn experiment_iteratables(logging: bool) {
     }
 }
 
-fn experimental_vectors(logging: bool) {
+fn experiment_vectors(logging: bool) {
     //Defining vectors
     let _test_vector: Vec<u8> = Vec::new(); // usual vector definition
     let test_vector_b = vec![112,45,27,64,172,244]; // defining vectors using this shorthand
@@ -278,7 +330,7 @@ fn experiment_tuples(logging: bool) {
  * Enums
  */
 fn experiment_enums() -> bool {
-    enum Colors {Red, Blue, Green, White, Orange, Yellow, Purple}
+    enum Colors {Red, _Blue, _Green, _White, _Orange, _Yellow, _Purple}
 
     let mut _favorite_color: Colors = Colors::Red;
 
@@ -343,14 +395,36 @@ fn experiment_strings() {
  * Testing out file import
  */
 fn experiment_files() {
+    let open_file_url = "./files/test_string.txt";
+    let create_file_url = "./files/new_file.txt";
     // Open a specific file
-    let mut file = File::open("./files/test_string.txt")
-        .expect("Error occured when opening the file!");
-    // Creating new string to hold contents of file
-    let mut contents = String::new();
-    // reading file contents and storing them in a string, expect is used to handle errors
-    file.read_to_string(&mut contents)
-        .expect("Error occured when converting file to string");
+    let mut opened_file = File::open(open_file_url)
+        .expect("Error: when opening file 1!");
 
-    println!("Contents:\n\n{}", contents);
+    let mut created_file = File::create(create_file_url)
+        .expect("Error: when creating file 2!");
+
+    // Creating new string to hold contents of file
+    let mut contents_f1 = String::new();
+    let mut contents_f2 = String::new();
+
+    // reading file contents and storing them in a string, expect is used to handle errors
+    opened_file.read_to_string(&mut contents_f1)
+        .expect("Error: file 1 reading to string");
+    
+    println!("Contents of File 1:\n{}", contents_f1);
+
+    let new_contents = format!("Testing write operation:\n{}", &contents_f1);
+
+    created_file.write_all(new_contents.as_bytes())
+        .expect("Error: writing string to file.");
+
+    // Need to reopen the file to access the data
+    created_file = File::open(create_file_url)
+                        .expect("Error: when opening file 2!");
+    
+    created_file.read_to_string(&mut contents_f2)
+        .expect("Error: file 2 reading to string");
+        
+    println!("Contents of File 2:\n{}", contents_f2);
 }

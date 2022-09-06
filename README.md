@@ -48,6 +48,10 @@
 * Chapter 10 of The Book
     * Generic Data Types
     * Traits and defining shared behvior
+* Match operator (Rust's switch statement)
+* CLI arguments
+* Taking user input
 * Files
     * Importing file related struct and library
     * Reading from a file
+    * Writing to a file
