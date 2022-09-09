@@ -8,6 +8,8 @@ use std::io;
 use std::io::prelude::*;
 use std::env;
 
+use std::collections::HashMap;
+
 /*
 @MOUD
 Hey, this is just a basic Rust file where I'm testing out some concepts in one place
@@ -106,6 +108,7 @@ fn the_scientist(matchable: &str) {
         "e7" => experiment_references(),
         "e8" => experiment_strings(),
         "e9" => experiment_files(),
+        "e10" => experimenting_hashmaps(),
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -120,7 +123,7 @@ fn the_scientist(matchable: &str) {
 fn experiment_user_input() {
     let mut input = String::new();
     
-    println!("Please Select an experiment 👨‍🔬:
+    println!("👨‍🔬: Please write your heading, or multiple, add home to the end to return here afterwards!
     \ne0 => experiment_structy
     \ne1 => experiment_variables & experiment_conditionals
     \ne2 => experiment_loops
@@ -131,6 +134,7 @@ fn experiment_user_input() {
     \ne7 => experiment_references
     \ne8 => experiment_strings
     \ne9 => experiment_files
+    \ne10 => experimenting_hashmaps
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");
@@ -427,4 +431,41 @@ fn experiment_files() {
         .expect("Error: file 2 reading to string");
         
     println!("Contents of File 2:\n{}", contents_f2);
+}
+
+
+/**
+ * Testing out hashmaps
+ */
+fn experimenting_hashmaps() {
+    // A hashmap to store the token's values
+    let mut balances = HashMap::new();
+    let address_1 = "HjUDz4EpUL7HSmRsMBSbLKnhGq5YFhPdw6wbfTiCVwsQ";
+    let address_2 = "8Rdp7S77oqojdbxrxznHK94fyrAn7bJBrFE9r7kgCQx1";
+    let address_3 = "HjUDz4EpUL7HSmRsMBSbLKnhGq5YFhPdw6wbfTiABvs2";
+
+    // Testing out inserting, for example if these were the admin accounts
+    balances.insert(address_1, 500000);
+    balances.insert(address_2, 140000);
+    balances.insert(address_3, 240000);
+
+    //Getting Data
+    match balances.get(address_3) {
+        Some(amount) => println!("Fetched balance: {}", amount),
+        None => println!("Address doesn't exist in system")
+    }
+
+    // Getting counts
+    let holders_count = balances.len(); 
+    println!("Holders: {}", holders_count);
+
+    // Removing Address
+    balances.remove(address_3);
+    let has_key_been_removed = balances.contains_key(address_3);
+    println!("Does address {} exist in the hashmap? {}", address_3, has_key_been_removed);
+    
+    // Looping over hashmap to display all addresses and balances
+    for (address, balance) in &balances {
+        println!("Address: {} has a balance of: {} ", address, balance);
+    }
 }

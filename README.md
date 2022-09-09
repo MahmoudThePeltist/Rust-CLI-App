@@ -55,3 +55,6 @@
     * Importing file related struct and library
     * Reading from a file
     * Writing to a file
+* Hashmaps
+    * Creating, inserting and removing from a hashmap
+    * using `len()` and `contains_key()` + looping to interact with hashmap
