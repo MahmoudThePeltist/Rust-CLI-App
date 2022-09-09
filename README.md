@@ -58,3 +58,6 @@
 * Hashmaps
     * Creating, inserting and removing from a hashmap
     * using `len()` and `contains_key()` + looping to interact with hashmap
+* Random Numbers
+    * installing and importing the `rand` crate 
+    * generating ranges and booleans
