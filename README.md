@@ -1,4 +1,5 @@
-# RUST experiment 1
+# RUST Concepts Test CLI App
+This is a CLI tool that I'm expanding on to test out different rust concepts and code architecture. 
 
 ## CLI commands
 ### When not using cargo
