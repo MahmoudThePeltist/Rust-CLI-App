@@ -10,6 +10,10 @@ use std::env;
 
 use std::collections::HashMap;
 
+// First time messing with crates
+extern crate rand;
+use rand::Rng;
+
 /*
 @MOUD
 Hey, this is just a basic Rust file where I'm testing out some concepts in one place
@@ -108,7 +112,8 @@ fn the_scientist(matchable: &str) {
         "e7" => experiment_references(),
         "e8" => experiment_strings(),
         "e9" => experiment_files(),
-        "e10" => experimenting_hashmaps(),
+        "e10" => experiment_hashmaps(),
+        "e11" => { experiment_random_person(); },
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -124,17 +129,18 @@ fn experiment_user_input() {
     let mut input = String::new();
     
     println!("👨‍🔬: Please write your heading, or multiple, add home to the end to return here afterwards!
-    \ne0 => experiment_structy
-    \ne1 => experiment_variables & experiment_conditionals
-    \ne2 => experiment_loops
-    \ne3 => experiment_vectors
-    \ne4 => experiment_iteratables
-    \ne5 => experiment_tuples
-    \ne6 => experiment_enums
-    \ne7 => experiment_references
-    \ne8 => experiment_strings
-    \ne9 => experiment_files
-    \ne10 => experimenting_hashmaps
+    \ne0 => generating multiple strcuts
+    \ne1 => variables & conditionals
+    \ne2 => loops
+    \ne3 => vectors
+    \ne4 => iteratables
+    \ne5 => tuples
+    \ne6 => enums
+    \ne7 => passing references
+    \ne8 => generating strings
+    \ne9 => reading and writing to files
+    \ne10 => hashmaps
+    \ne11 => random person generator
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");
@@ -437,7 +443,7 @@ fn experiment_files() {
 /**
  * Testing out hashmaps
  */
-fn experimenting_hashmaps() {
+fn experiment_hashmaps() {
     // A hashmap to store the token's values
     let mut balances = HashMap::new();
     let address_1 = "HjUDz4EpUL7HSmRsMBSbLKnhGq5YFhPdw6wbfTiCVwsQ";
@@ -468,4 +474,40 @@ fn experimenting_hashmaps() {
     for (address, balance) in &balances {
         println!("Address: {} has a balance of: {} ", address, balance);
     }
+}
+
+/**
+ * Using RNG to generate a person
+ */
+fn experiment_random_person() -> Person {
+    let mut rng = rand::thread_rng();
+    let selected_name: String;
+    let selected_gender: char;
+    let male_names = ["Mo","Moud","John","Mike","Andrew"];
+    let female_names = ["Emma","Sarah","Assma","Aisha","Laila"];
+    let last_names = ["Chan", "Smith","White","Black","Aburas","Garbo"];
+
+    let last_name_ndx = rng.gen_range(0..last_names.len());
+    if rng.gen_bool(1.0 / 2.0) {
+        let first_name_ndx = rng.gen_range(0..male_names.len());
+        selected_name = format!("{} {}",male_names[first_name_ndx], last_names[last_name_ndx]);
+        selected_gender = 'M';
+    } else {
+        let first_name_ndx = rng.gen_range(0..female_names.len());
+        selected_name = format!("{} {}",female_names[first_name_ndx], last_names[last_name_ndx]);
+        selected_gender = 'F';
+    }
+
+    let new_person = Person {
+        name: selected_name,
+        gender: selected_gender,
+        dob: DateOfBirth {
+            day: rng.gen_range(1..30),
+            month: rng.gen_range(1..13),
+            year: rng.gen_range(1960..2010)
+        }
+    };
+    
+    new_person.log_stuff();
+    return new_person;
 }
