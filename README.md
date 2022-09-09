@@ -8,6 +8,11 @@
 ### When using cargo
 * Run `cargo run`
 
+## Directory Structure:
+* `./main.rs` Entry Point
+* `./my_structs/..` Module to manage reusable structs
+* `./experiments/..` Module to split up and manage experiment files
+
 ## Concepts covered:
 * Function declaration
     * multiple functions per file
@@ -63,3 +68,7 @@
 * Random Numbers
     * installing and importing the `rand` crate 
     * generating ranges and booleans
+* Codebase architecture;
+    * Single file modules and imports
+    * module directories and export/import
+    * struct only modules and pub status of structs
