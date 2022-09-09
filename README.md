@@ -16,13 +16,16 @@
 * Variables
     * definition (let, int, char, string)
     * Variable mutability vs immutability 
+    * constants
 * Asserting equality using the `assert_eq!()` marcro
 * logging and passing variables into logs using the `println!()` macro
-* conditional statements (if / else)
+* conditional statements
+    * (if / else)
+    * Match operator (Rust's switch statement)
 * looping
     * using `loop` paired with break & continue
     * using `while`
-* arrays
+* arrays and iteratables
     * ranges using `..` + iterating over them using `for in`
     * definition with mutability and immutability
     * iterating over them using `for in`
@@ -32,7 +35,7 @@
     * Vector definition (both options)
     * Vector mutation functions
     * Vector iteration
-* constants
+    * Converting an iterator into a vector using `collect()`
 * tuples and tuple deconstruction
 * codeblocks concept
 * shadowing concept and simple implementation
@@ -44,11 +47,10 @@
 * Strings
     * the difference between a `String` and a slice `str` (&str)
     * Strings as a struct and defining them using a slice 
-    * Common string methods
+    * Common string methods including `push()` `push_str()` `lines()` `replace()` `split()` `chars()` `trim()`
 * Chapter 10 of The Book
     * Generic Data Types
     * Traits and defining shared behvior
-* Match operator (Rust's switch statement)
 * CLI arguments
 * Taking user input
 * Files
