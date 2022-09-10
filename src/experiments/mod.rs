@@ -8,3 +8,4 @@ pub mod ex_files;
 pub mod ex_looper;
 pub mod ex_tuples;
 pub mod ex_mods;
+pub mod ex_optionum;

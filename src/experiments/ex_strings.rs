@@ -55,7 +55,7 @@ pub fn experiment_strings() {
         // Getting a specific index using collect
         let name_chars: Vec<char> = name.chars().collect();
         println!("F6   Collect: Second letter of my name: {}", name_chars[1]);
-        // Gettinga specific index using match
+        // Gettinga specific index, the nth function returns an Option Enum as a value may or may not be returned
         match name.chars().nth(1) {
             Some(data) => println!("F6   Match: Second letter of my name: {}", data),
             None => println!("F6   Match: did not find data at index 1")

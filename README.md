@@ -74,3 +74,6 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
     * Single file modules and imports
     * module directories and export/import
     * struct only modules and pub status of structs
+* Enums
+    * Enum definition and usage
+    * Options enum, purpose, handling and creation

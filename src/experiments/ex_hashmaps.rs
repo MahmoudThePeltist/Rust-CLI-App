@@ -16,7 +16,7 @@ pub fn experiment_hashmaps() {
     balances.insert(address_2, 140000);
     balances.insert(address_3, 240000);
 
-    //Getting Data
+    //Getting Data, the get function returns an Option Enum as a value may or may not be returned
     match balances.get(address_3) {
         Some(amount) => println!("Fetched balance: {}", amount),
         None => println!("Address doesn't exist in system")
