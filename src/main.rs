@@ -9,6 +9,7 @@ use experiments::ex_condition;
 use experiments::ex_files;
 use experiments::ex_looper;
 use experiments::ex_tuples;
+use experiments::ex_mods;
 
 mod my_structs;
 
@@ -60,6 +61,7 @@ fn the_scientist(matchable: &str) {
         "e9" => ex_files::experiment_files(),
         "e10" => ex_hashmaps::experiment_hashmaps(),
         "e11" => { ex_rand::experiment_random_person(); },
+        "e12" => ex_mods::experiment_modules(),
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -87,6 +89,7 @@ fn experiment_user_input() {
     \ne9 => reading and writing to files
     \ne10 => hashmaps
     \ne11 => random person generator
+    \ne12 => testing modules
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");

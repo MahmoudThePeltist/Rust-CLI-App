@@ -69,7 +69,8 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
 * Random Numbers
     * installing and importing the `rand` crate 
     * generating ranges and booleans
-* Codebase architecture;
+* Codebase architecture
+    * `mod` decleration and usage
     * Single file modules and imports
     * module directories and export/import
     * struct only modules and pub status of structs
