@@ -46,6 +46,7 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
     * Vector mutation functions
     * Vector iteration
     * Converting an iterator into a vector using `collect()`
+    * Vector borrowing, moving and using `to_owned()` to clone (CLI commands section)
 * tuples and tuple deconstruction
 * codeblocks concept
 * shadowing concept and simple implementation
@@ -87,3 +88,11 @@ Generics
     * Chapter 1 of [The Async Book](https://rust-lang.github.io/async-book)
     * Using `futures` `block_on()` to run async functions in regular functions
     * Using `futures` `join!()` to run multiple async functions simultaniously 
+* Running CLI commands
+    * Using the Command structs and `arg()` to build a command
+    * Getting the result of the command as a string safely, unsafely and lossy 
+
+
+
+## More reading material
+* [Rust Gentle Intro](https://stevedonovan.github.io/rust-gentle-intro/print.html)

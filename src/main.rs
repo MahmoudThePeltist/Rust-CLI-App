@@ -1,5 +1,6 @@
 // Importing modules
 mod experiments;
+use experiments::ex_cli;
 use experiments::ex_strings;
 use experiments::ex_structs;
 use experiments::ex_vars;
@@ -66,6 +67,7 @@ fn the_scientist(matchable: &str) {
         "e12" => ex_mods::experiment_modules(),
         "e13" => ex_optionum::experiment_option_enum(),
         "e14" => ex_http::experiment_requests(),
+        "e15" => ex_cli::experiment_cli_commands(),
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -91,11 +93,12 @@ fn experiment_user_input() {
     \ne7 => passing references
     \ne8 => generating strings
     \ne9 => reading and writing to files
-    \ne10 => hashmaps
+    \ne10 => using hashmaps
     \ne11 => random person generator
     \ne12 => creating modules
     \ne13 => handling and returning Option enum
-    \ne14 => HTTP requests
+    \ne14 => making HTTP requests
+    \ne15 => running CLI commands
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");
