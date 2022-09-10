@@ -23,6 +23,10 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
     * definition (let, int, char, string)
     * Variable mutability vs immutability 
     * constants
+* Enums
+    * Enum definition, comparison with `match` and usage
+    * Options enum, purpose, handling and creation
+    * Enum function decleration and usage
 * Asserting equality using the `assert_eq!()` marcro
 * logging and passing variables into logs using the `println!()` macro
 * conditional statements
@@ -75,9 +79,6 @@ Generics
     * Single file modules and imports
     * module directories and export/import
     * struct only modules and pub status of structs
-* Enums
-    * Enum definition and usage
-    * Options enum, purpose, handling and creation
 * HTTP Calls
     * installing and using `reqwest` crate
     * making blocking vs async http calls

@@ -1,3 +1,7 @@
+// Compiler annotations (inner type) known as attributes
+#![allow(dead_code)]
+#![allow(unused_assignments)]
+
 use crate::my_structs::strcts::Person;
 use crate::my_structs::strcts::DateOfBirth;
 use crate::my_structs::strcts::LogStuff;
@@ -47,22 +51,44 @@ pub fn experiment_references() {
 
 }
 
+// Creating an enum to represent colors
+enum Colors {
+    Red, Blue, Green, White, Orange, Yellow, Purple
+}
+// Creating an enum to represent days of the week
+enum Days {
+    Monday, Tuesday, Wedensday, Thursday, Friday, Saturday, Sunday
+}
+// enum methods are methods that can be applied from any enum value
+impl Days {
+    pub fn is_weekend(&self) -> bool {
+        return match self {
+            Days::Saturday | Days::Sunday => true,
+            _ => false
+        }
+    }
+}
+
 
 /**
- * Enums
+ * Creating, modifying and checking the value of enums, as well as 
+ * running enum methods
  */
 pub fn experiment_enums() -> bool {
-    enum Colors {Red, _Blue, _Green, _White, _Orange, _Yellow, _Purple}
 
-    let mut _favorite_color: Colors = Colors::Red;
+    let mut favorite_color: Colors = Colors::Red;
+    favorite_color = Colors::Green;
 
-    return true;
-    
-    // Cannot check if two items are the same enum, so I had to remove a conditional from here
-    // return check_favorite_color(favorite_color, Colors::Red);
+    let value = match favorite_color {
+        Colors::Green => true,
+        _ => false
+    };
 
+    println!("Favorite color is green? {}", value);
 
-    // fn check_favorite_color(color: Colors, check_for: Colors) -> bool {
-    //     return color == check_for;
-    // } 
+    let today = Days::Saturday;
+
+    println!("Is today the weekend? {}", today.is_weekend());
+
+    return value;
 }

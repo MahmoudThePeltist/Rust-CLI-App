@@ -87,7 +87,7 @@ fn experiment_user_input() {
     \ne3 => vectors
     \ne4 => iteratables
     \ne5 => tuples
-    \ne6 => enums
+    \ne6 => enums, enum match and enum methods
     \ne7 => passing references
     \ne8 => generating strings
     \ne9 => reading and writing to files
