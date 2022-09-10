@@ -1,6 +1,11 @@
+
+// Moved Macro import here due to Rust wanting to have macro use before module imports
+#[macro_use] 
+extern crate serde_derive;
 // Importing modules
 mod experiments;
 use experiments::ex_cli;
+use experiments::ex_json;
 use experiments::ex_strings;
 use experiments::ex_structs;
 use experiments::ex_vars;
@@ -69,6 +74,7 @@ fn the_scientist(matchable: &str) {
         "e13" => ex_optionum::experiment_option_enum(),
         "e14" => ex_http::experiment_requests(),
         "e15" => ex_cli::experiment_cli_commands(),
+        "e16" => ex_json::experiment_json(),
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -100,6 +106,7 @@ fn experiment_user_input() {
     \ne13 => handling and returning Option enum
     \ne14 => making HTTP requests
     \ne15 => running CLI commands
+    \ne16 => Serializing and deserializing JSON
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");

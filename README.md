@@ -1,5 +1,5 @@
 # RUST Concepts Test CLI App
-This is a CLI tool that I'm expanding on to test out different rust concepts and code architecture. 
+This is a simple CLI application that experiments with different rust concepts in one single repository, I'm expanding on it to test out different ideas and code architecture with the goal of having it be a learning resource and practical example. 
 
 ## CLI commands
 ### When not using cargo
@@ -96,6 +96,10 @@ Generics
     * Asserting truth using `assert!()` marcro and equality using `assert_eq!()` marcro
     * causing panic using `panic!()` marcro, using `#[should_panic]` attribute
     * Running tests using `cargo test` + ignoring tests using `#[ignore]` attribute
+* Handling JSON
+    * Mocking JSON using rust raw strings
+    * Parsing JSON into a readable form using `serde` json value
+    * Parsing JSON and converting it into structs automatically using `serde` derive
 
 
 

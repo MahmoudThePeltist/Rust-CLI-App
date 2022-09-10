@@ -11,3 +11,4 @@ pub mod ex_mods;
 pub mod ex_optionum;
 pub mod ex_http;
 pub mod ex_cli;
+pub mod ex_json;
