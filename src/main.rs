@@ -15,6 +15,7 @@ use experiments::ex_optionum;
 use experiments::ex_http;
 
 mod my_structs;
+mod tests;
 
 // Used for reading user input
 use std::io;

@@ -8,6 +8,7 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
 
 ### When using cargo
 * Run `cargo run`
+* Test `cargo test`
 
 ## Directory Structure:
 * `./main.rs` Entry Point
@@ -27,7 +28,6 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
     * Enum definition, comparison with `match` and usage
     * Options enum, purpose, handling and creation
     * Enum function decleration and usage
-* Asserting equality using the `assert_eq!()` marcro
 * logging and passing variables into logs using the `println!()` macro
 * conditional statements
     * (if / else)
@@ -91,6 +91,11 @@ Generics
 * Running CLI commands
     * Using the Command structs and `arg()` to build a command
     * Getting the result of the command as a string safely, unsafely and lossy 
+* Testing Code
+    * Writing a test module and methods utilizing testing compiler attributes 
+    * Asserting truth using `assert!()` marcro and equality using `assert_eq!()` marcro
+    * causing panic using `panic!()` marcro, using `#[should_panic]` attribute
+    * Running tests using `cargo test` + ignoring tests using `#[ignore]` attribute
 
 
 
