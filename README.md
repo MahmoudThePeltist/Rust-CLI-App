@@ -54,7 +54,8 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
     * the difference between a `String` and a slice `str` (&str)
     * Strings as a struct and defining them using a slice 
     * Common string methods including `push()` `push_str()` `lines()` `replace()` `split()` `chars()` `trim()`
-* Chapter 10 of The Book
+Generics
+    * Chapter 10 of [The Book](https://doc.rust-lang.org/book/)
     * Generic Data Types
     * Traits and defining shared behvior
 * CLI arguments
@@ -77,3 +78,11 @@ This is a CLI tool that I'm expanding on to test out different rust concepts and
 * Enums
     * Enum definition and usage
     * Options enum, purpose, handling and creation
+* HTTP Calls
+    * installing and using `reqwest` crate
+    * making blocking vs async http calls
+    * handling issues and checking response status
+* Async/Await
+    * Chapter 1 of [The Async Book](https://rust-lang.github.io/async-book)
+    * Using `futures` `block_on()` to run async functions in regular functions
+    * Using `futures` `join!()` to run multiple async functions simultaniously 

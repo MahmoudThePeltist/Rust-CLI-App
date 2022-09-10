@@ -9,3 +9,4 @@ pub mod ex_looper;
 pub mod ex_tuples;
 pub mod ex_mods;
 pub mod ex_optionum;
+pub mod ex_http;

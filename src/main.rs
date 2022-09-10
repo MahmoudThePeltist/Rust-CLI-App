@@ -11,6 +11,7 @@ use experiments::ex_looper;
 use experiments::ex_tuples;
 use experiments::ex_mods;
 use experiments::ex_optionum;
+use experiments::ex_http;
 
 mod my_structs;
 
@@ -64,6 +65,7 @@ fn the_scientist(matchable: &str) {
         "e11" => { ex_rand::experiment_random_person(); },
         "e12" => ex_mods::experiment_modules(),
         "e13" => ex_optionum::experiment_option_enum(),
+        "e14" => ex_http::experiment_requests(),
         // Go to user input based picker or quit
         "home" => experiment_user_input(),
         "exit" => return,
@@ -93,6 +95,7 @@ fn experiment_user_input() {
     \ne11 => random person generator
     \ne12 => creating modules
     \ne13 => handling and returning Option enum
+    \ne14 => HTTP requests
     \nhome => 🏠 come back to selector
     \nexit => 🏃‍♂️ skips testing and exits
     ");
